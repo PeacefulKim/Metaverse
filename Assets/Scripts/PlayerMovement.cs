@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //°È±â ¶Ù±â
         bool isRunning = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
-        float currentSpeed = isRunning ? runSpeed : walkSpeed;
+        float currentSpeed = isRunning && isGrounded ? runSpeed : walkSpeed;
         rigidbody2d.velocity = new Vector2(movement.x * currentSpeed, rigidbody2d.velocity.y);
         isGrounded = IsGrounded();
     }
