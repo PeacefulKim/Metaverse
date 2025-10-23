@@ -30,3 +30,7 @@ public class NPCBase : MonoBehaviour
         if (collision.CompareTag("Player")) playerNearby = false;
     }
 }
+public interface Iinteract
+{
+    void Interact();
+}
