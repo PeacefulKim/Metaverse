@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,20 +13,25 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody2D rigidbody2d;
     public Collider2D collider2d;
+    public Animator animator;
     public Vector2 movement;
+
     private void Awake()
     {
         rigidbody2d = GetComponent<Rigidbody2D>();
         collider2d = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
     }
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal"); //좌우 움직임
+        animator.SetFloat("Speed",Mathf.Abs(movement.x));
         //점프
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rigidbody2d.velocity = new Vector2(rigidbody2d.velocity.x, jumpForce);
             isGrounded = false;
+            animator.SetBool("IsJumping", true);
         }
 
     }
@@ -36,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         float currentSpeed = isRunning && isGrounded ? runSpeed : walkSpeed;
         rigidbody2d.velocity = new Vector2(movement.x * currentSpeed, rigidbody2d.velocity.y);
         isGrounded = IsGrounded();
+
+        if (isGrounded) animator.SetBool("IsJumping", false);
     }
     private bool IsGrounded()
     {
