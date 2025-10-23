@@ -45,6 +45,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (isGrounded) animator.SetBool("IsJumping", false);
     }
+    private void LateUpdate()
+    {
+        Vector2 pos = transform.position;
+        pos.x = Mathf.Clamp(pos.x, -9f, 15f);
+        transform.position = pos;
+    }
     private bool IsGrounded()
     {
         Debug.DrawRay(rigidbody2d.position, Vector2.down, new Color(1, 0, 0));
