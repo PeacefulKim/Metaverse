@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            flappyManager.QuitGame();
+        }
         if (isDead)
         {
             if (deathCooldown <= 0)

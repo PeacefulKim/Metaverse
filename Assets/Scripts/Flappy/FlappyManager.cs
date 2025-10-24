@@ -8,6 +8,7 @@ public class FlappyManager : MonoBehaviour
     static FlappyManager flappyManager;
     public static FlappyManager Instance { get { return flappyManager; } }
     private int currentScore = 0;
+    public bool isGameOver = false;
     private void Awake()
     {
         flappyManager = this;
