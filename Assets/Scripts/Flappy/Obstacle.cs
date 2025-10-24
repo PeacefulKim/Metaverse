@@ -5,6 +5,7 @@ using Random = UnityEngine.Random;
 
 public class Obstacle : MonoBehaviour
 {
+    FlappyManager flappyManager;
     public float highPosY = 1f;
     public float lowPosY = -1f;
 
@@ -15,7 +16,10 @@ public class Obstacle : MonoBehaviour
     public Transform bottomObject;
 
     public float widthPadding = 4f;
-
+    private void Start()
+    {
+        flappyManager = FlappyManager.Instance;
+    }
     public Vector3 SetRandomPlace(Vector3 lastPosition, int obstacleCount)
     {
         float holeSize = Random.Range(holeSizeMin, holeSizeMax);
@@ -30,5 +34,9 @@ public class Obstacle : MonoBehaviour
 
         return placePosition;
     }
-
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        Player player = collision.GetComponent<Player>();
+        if (player != null) flappyManager.AddScore(1);
+    }
 }

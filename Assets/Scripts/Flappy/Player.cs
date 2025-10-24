@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    FlappyManager flappyManager = null;
     Animator animator = null;
     Rigidbody2D rb = null;
 
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     public bool godMode = false;
     void Start()
     {
+        flappyManager = FlappyManager.Instance;
         animator = transform.GetComponent<Animator>();
         rb = transform.GetComponent<Rigidbody2D>();
 
@@ -32,7 +34,7 @@ public class Player : MonoBehaviour
             {
                 if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    //게임 재시작
+                    flappyManager.RestartGame();
                 }
             }
             else
@@ -69,5 +71,6 @@ public class Player : MonoBehaviour
         animator.SetInteger("IsDie", 1);
         isDead = true;
         deathCooldown = 1f;
+        flappyManager.GameOver();
     }
 }

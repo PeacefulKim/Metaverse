@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class FlappyManager : MonoBehaviour
 {
     static FlappyManager flappyManager;
-    public static FlappyManager instance { get { return flappyManager; } }
+    public static FlappyManager Instance { get { return flappyManager; } }
     private int currentScore = 0;
     private void Awake()
     {
