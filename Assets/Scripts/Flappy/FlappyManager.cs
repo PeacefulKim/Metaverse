@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class FlappyManager : MonoBehaviour
 {
@@ -10,7 +11,11 @@ public class FlappyManager : MonoBehaviour
 
     static ScoreUIManager scoreManager;
     public static ScoreUIManager ScoreManager { get { return scoreManager; } }
+    public int BestScore { get => bestScore; }
     private int currentScore = 0;
+    int bestScore = 0;
+
+    private const string BestScoreKey = "BestScore";
 
     private void Awake()
     {
@@ -20,6 +25,7 @@ public class FlappyManager : MonoBehaviour
     private void Start()
     {
         scoreManager.UpdateScore(0);
+        bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
     }
     public void GameOver()
     {
@@ -39,5 +45,13 @@ public class FlappyManager : MonoBehaviour
         currentScore += score;
         scoreManager.UpdateScore(currentScore);
         Debug.Log("Score: " + currentScore);
+    }
+    public void UpdateScore()
+    {
+        if(bestScore < currentScore)
+        {
+            bestScore = currentScore;
+            PlayerPrefs.SetInt(BestScoreKey, bestScore);
+        }
     }
 }
