@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class BgLooper : MonoBehaviour
 {
-    public int numBgCount = 5;
+    public int numBgCount = 3;
 
     public int obstacleCount = 0;
     public Vector3 obstacleLastPosition = Vector3.zero;
@@ -25,9 +25,9 @@ public class BgLooper : MonoBehaviour
     {
         Debug.Log("Triggered: " + collision.name);
 
-        if (collision.CompareTag("BackGround"))
+        if (collision.CompareTag("Environment"))
         {
-            float widthOfBgObject = ((BoxCollider2D)collision).size.x;
+            float widthOfBgObject = collision.GetComponent<SpriteRenderer>().bounds.size.x;
             Vector3 pos = collision.transform.position;
 
             pos.x += widthOfBgObject * numBgCount;
