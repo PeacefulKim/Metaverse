@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MinigameNpc : MonoBehaviour, Iinteract
+public class MiniGameNpc : MonoBehaviour, Iinteract
 {
     public string npcName = "미니게임";
     public void Interact()
