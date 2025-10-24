@@ -5,7 +5,8 @@ using UnityEngine;
 public class NPCBase : MonoBehaviour
 {
     private Iinteract interactable;
-    public GameObject speechBubble;
+    public GameObject bubblePrefab;
+    public GameObject currentBubble;
     private bool playerNearby = false;
     private bool isVisible = false;
     private void Awake()
@@ -18,19 +19,21 @@ public class NPCBase : MonoBehaviour
     }
     private void Start()
     {
-        if (speechBubble != null) speechBubble.SetActive(false);
+        if (currentBubble != null) currentBubble.SetActive(false);
     }
     private void Update()
     {
         if (playerNearby && !isVisible) 
         {
             ShowBubble();
-            if(Input.GetKeyDown(KeyCode.E)) interactable.Interact();
-            return;
         }
         else if (!playerNearby && isVisible)
         {
             HideBubble();
+        }
+        if(playerNearby && Input.GetKeyDown(KeyCode.E))
+        {
+            interactable.Interact();
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,19 +46,22 @@ public class NPCBase : MonoBehaviour
     }
     void ShowBubble()
     {
-        if (speechBubble != null)
+        if (bubblePrefab != null && currentBubble == null) 
         {
-            speechBubble.SetActive(true);
+            currentBubble = Instantiate(bubblePrefab, transform.position + new Vector3(0, 1.5f, 0), Quaternion.identity);
+            Bubble bubble = currentBubble.GetComponent<Bubble>(); 
+            if (bubble != null) bubble.target = transform;
             isVisible = true;
         }
     }
     void HideBubble()
     {
-        if (speechBubble != null)
+        if (currentBubble != null)
         {
-            speechBubble.SetActive(false);
-            isVisible = false;
+            Destroy(currentBubble);
+            currentBubble = null;
         }
+        isVisible = false;
     }
 }
 public interface Iinteract
