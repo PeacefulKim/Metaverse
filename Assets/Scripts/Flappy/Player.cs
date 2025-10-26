@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
 
     bool isFlap = false;
     public bool godMode = false;
+
     void Start()
     {
         flappyManager = FlappyManager.Instance;
