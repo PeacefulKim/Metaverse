@@ -29,8 +29,9 @@ public class FlappyManager : MonoBehaviour
     }
     public void GameOver()
     {
-        Debug.Log("Game Over");
         scoreManager.SetRestart();
+        UpdateScore();
+        Debug.Log(bestScore);
     }
     public void RestartGame()
     {
