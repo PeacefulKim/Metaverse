@@ -6,6 +6,7 @@ using UnityEngine;
 public class ScoreUIManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreTxt;
+    public TextMeshProUGUI bestScoreTxt;
     public TextMeshProUGUI restartTxt;
     void Start()
     {
@@ -24,5 +25,9 @@ public class ScoreUIManager : MonoBehaviour
     public void UpdateScore(int score)
     {
         scoreTxt.text = score.ToString();
+    }
+    public void UpdateBestScore(int score)
+    {
+        bestScoreTxt.text = "Best Score: " + score.ToString();
     }
 }

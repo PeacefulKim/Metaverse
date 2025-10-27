@@ -31,6 +31,7 @@ public class FlappyManager : MonoBehaviour
     {
         scoreManager.SetRestart();
         UpdateScore();
+        scoreManager.UpdateBestScore(bestScore);
         Debug.Log(bestScore);
     }
     public void RestartGame()
